@@ -1,0 +1,62 @@
+<header class="bar bar-header bar-stable">
+ <a href="#/app/home" class="button button-icon icon ion-ios7-arrow-thin-left"></a>
+  <div class="h1 title">Meus Profissionais</div>
+  <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+</header>
+
+
+
+
+ 
+
+
+
+
+
+
+<ion-content class="has-header">
+
+<ion-refresher on-refresh="doRefresh()"
+                     pulling-text="Pull to refresh..."
+                     refreshing-text="Refreshing!"
+                     refreshing-icon="ion-loading-c">
+                     
+      </ion-refresher>
+
+
+  <ion-list>
+    <ion-item class="item-avatar item-icon-right" ng-repeat="registro in registros" href="#/app/profissional/{{registro.id}}">
+    <img src="{{registro.foto}}">
+    <h2>{{registro.nome}}</h2>
+    <p>{{registro.Profissao}}  - {{registro.cidade}} </p>
+  </ion-list>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+

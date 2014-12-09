@@ -1,0 +1,112 @@
+﻿<div class="modal" style="z-index:999; position: absolute; margin-left:5px; margin-top:5px;">
+  <ion-header-bar>
+    <h1 class="title">{{form_nome}}</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Fechar</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div ng-show="form_login">
+      <form ng-submit="doLogin()"  >
+        <div class="list">
+          <p ng-bind-html="retorno_error_login" style="margin-left:20px"></p>
+          <label class="item item-input"> <span class="input-label">Usuário</span>
+            <input type="text" id="usuario" name="usuario">
+          </label>
+          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+          <label class="item item-input"> <span class="input-label">Senha</span>
+            <input type="password" id="senha" name="senha">
+          </label>
+          <p ng-bind-html="errorSenha" style="margin-left:20px"></p>
+          <div class="padding" ng-hide="enviando_login">
+            <button type="submit" class="button button-block button-positive">Entrar</button>
+          </div>
+          <div class="padding" ng-show="enviando_login"> <img src="img/loading.gif"> aguarde, estamos verificando seus dados... </div>
+        </div>
+      </form>
+      <div class="row responsive-sm">
+        <div class="col col-50" style="text-align:center">
+          <button class="button button-clear button-positive button-small" ng-click="senha()"><i class="icon ion-star"></i> Esqueci minha senha</button>
+        </div>
+      </div>
+    </div>
+    <div ng-show="form_esqueci">
+      <form ng-submit="esqueci_senha()" id="form1">
+        <div class="list">
+                  <p ng-bind-html="retorno_esqueci_senha_error" style="margin-left:20px"></p>
+                   <p ng-bind-html="retorno_esqueci_senha" style="margin-left:20px"></p>
+  
+ 
+
+          <label class="item item-input"> <span class="input-label">usuário</span>
+            <input type="text" id="usuario_recupera_senha" name="usuario_recupera_senha">
+            
+          </label>
+          <p ng-bind-html="errorUsuario2" style="margin-left:20px"></p>
+          <div class="padding" ng-hide="enviando_gerar">
+            <button class="button button-block button-positive"  type="submit" >Gerar Nova Senha</button>
+          </div>
+          <div class="padding" ng-show="enviando_gerar"> <img src="img/loading.gif"> aguarde, estamos verificando seus dados... </div>
+        </div>
+      </form>
+       
+    </div>
+    <div ng-show="form_cadastro">
+      <form ng-submit="cadastroSalvar()" id="formcadastro">
+        <div class="list">
+         <label class="item item-input"> <span class="input-label">Nome</span>
+            <input type="text" id="nome" name="nome">
+            
+          </label>
+          <p ng-bind-html="errorNome" style="margin-left:20px"></p>
+          
+          
+          
+         <label class="item item-input"> <span class="input-label">celular</span>
+            <input type="text" id="celular" name="celular">
+            
+          </label>
+          <p ng-bind-html="errorCelular" style="margin-left:20px"></p>
+          
+          
+          
+     
+           <label class="item item-input"> <span class="input-label">E-mail</span>
+            <input type="text" id="email" name="email">
+           </label>
+          <p ng-bind-html="errorEmail" style="margin-left:20px"></p>
+          
+          
+          
+          
+          
+         <label class="item item-input"> <span class="input-label">Usuário</span>
+            <input type="text" id="usuario" name="usuario">
+            
+          </label>
+          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+          
+          
+          
+          
+           <label class="item item-input"> <span class="input-label">Senha</span>
+            <input type="text" id="usuario" name="usuario">
+            
+          </label>
+          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+          
+          
+          
+           <label class="item item-input"> <span class="input-label">Confirmar Senha</span>
+            <input type="text" id="senha1" name="senha1">
+            
+          </label>
+            
+          <div class="padding">
+            <button type="submit" class="button button-block button-positive">Cadastrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</div>

@@ -1,0 +1,44 @@
+﻿<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Orçamento</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeOrcamento()">Fechar</button>
+    </div>
+  </ion-header-bar>
+<ion-content class="has-header padding">
+
+   
+
+<div class="row">
+  <div class="col col-70"><strong>Pedreiro</strong></div>
+  <div class="col col-30" style="text-align: right">07/12/2014 05:00</div>
+</div>
+
+
+
+<div class="row">
+  <div class="col"><p>Boa Tarde, estou precisando de um pedreiro em minha residencia, preciso trocar minha ceramica.</p></div>
+</div>
+ 
+
+
+
+ <div class="row">
+  <div class="col"><strong>Respostas a sua solicitação</strong></div>
+</div>
+
+ 
+
+<ion-list>
+    <ion-item class="item-avatar" ng-repeat="registro in registros" ng-click="showActionsheet()">
+    <img src="img/homem.jpg">
+    <h2>Lucas Martins</h2>
+    <p>Pedreiro  -  07/12/2014 05:00</p>
+    <p>Boa Tarde, estou precisando de um pedreiro em minha residencia, preciso trocar minha ceramica.</p>
+  </ion-list>
+
+ 
+
+
+  </ion-content>
+</div>
