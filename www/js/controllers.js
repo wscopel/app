@@ -45,7 +45,7 @@ angular.module('selfboss.controllers', [])
 
 
  
- .controller('LoginCtrl', function($scope, $ionicModal, $http, $timeout, $location,$state, auth,$ionicLoading) {
+ .controller('LoginCtrl', function($scope, $ionicModal, $http, $timeout, $location, $state, auth, $ionicLoading) {
 	 
 	  
    
@@ -249,7 +249,7 @@ $scope.cadastroSalvar = function() {
   };
 })
 
-.controller('AppCtrl', function($scope, $state, $ionicModal, $http, $timeout, $location, $ionicSlideBoxDelegate, auth, OpenFB) {
+.controller('AppCtrl', function($scope, $state, $ionicModal, $http, $timeout, $location, $ionicSlideBoxDelegate, auth) {
   
     auth.checkStatus();
    
