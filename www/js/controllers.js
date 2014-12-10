@@ -46,6 +46,8 @@ angular.module('selfboss.controllers', [])
 
  
  .controller('LoginCtrl', function($scope, $ionicModal, $http, $timeout, $location,$state, auth,$ionicLoading) {
+	 
+	  
    
  $scope.logofechar        = true;
 
@@ -73,7 +75,7 @@ $scope.cadastroSalvar = function() {
  			
 	$http({
         method  : 'POST',
- 	    url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar',  
+ 	    url     : 'http://localhost/selfboss/html/cadastro/salvar',  
  
          data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
@@ -114,11 +116,16 @@ $scope.cadastroSalvar = function() {
 	
 	$scope.enviando_gerar  = true;
  	
-	var dados = $('#form1').serialize();	
+	//var dados = $('#form1').serialize();	
+  
+  var dados = $.param({ 
+	            usuario_recupera_senha:  $("input:text[name='usuario_recupera_senha']").val() 
+   			});	
+  
   
  	$http({
         method  : 'POST',
-	     url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera',  
+	     url     : 'http://localhost/selfboss/html/home/recupera',  
          data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
     })
@@ -201,7 +208,7 @@ $scope.cadastroSalvar = function() {
  			   
  	 $http({
         method  : 'POST',  
-        url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login',  
+        url     : 'http://localhost/selfboss/html/home/login',  
         data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
     })
@@ -239,7 +246,7 @@ $scope.cadastroSalvar = function() {
   };
 })
 
-.controller('AppCtrl', function($scope, $state, $ionicModal, $http, $timeout, $location, $ionicSlideBoxDelegate, auth) {
+.controller('AppCtrl', function($scope, $state, $ionicModal, $http, $timeout, $location, $ionicSlideBoxDelegate, auth, OpenFB) {
   
     auth.checkStatus();
    
@@ -363,6 +370,11 @@ $scope.cadastroSalvar = function() {
  
 
 .controller('dadosCtrl', function($scope, $stateParams,$ionicLoading,$timeout, $ionicActionSheet) {
+	
+	
+	$scope.session_cd_cliente = window.localStorage['session_cd_cliente'];
+    $scope.session_usuario    = window.localStorage['session_usuario'];
+    $scope.session_nome       = window.localStorage['session_nome'];
 
 
 
@@ -543,6 +555,7 @@ $scope.cadastroSalvar = function() {
   $scope.closeOrcamento = function() {
     
     $scope.modal_orcamento.hide();
+	 $scope.modal.hide();
 
 	 
   };
@@ -565,78 +578,72 @@ $scope.cadastroSalvar = function() {
  
 
 
-.controller('pesquisarCtrl', function($scope, $stateParams, $ionicModal, $ionicActionSheet) {
+.controller('pesquisarCtrl', function($scope, $stateParams, $timeout, $ionicModal, $ionicActionSheet) {
+	
+  $scope.registros = [
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 1 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 2 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 3 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 4 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 5 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 6 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 7 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 8 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 9 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 10 },
+	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 11 },
+   ];
+
+
+
+
+// infinit scroll
+//http://codepen.io/gnomeontherun/pen/HJkCj
+
+//atual
+//http://codepen.io/ionic/pen/mqolp
+
+ $scope.doRefresh = function() {
+    
+    console.log('Refreshing!');
+
+    
+    $timeout( function() {
+      //simulate async response
+      $scope.registros.push( 
+      [
+	{ nome: 'aJoao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 1 } 
+   ]
+	 
+    ); 
+
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
+    
+    }, 1000);
+      
+  };
 
  
 
- $scope.showActionsheet = function() {
-
-    $ionicActionSheet.show({
-      titleText: 'O que deseja fazer?',
-      buttons: [
-        { text: 'Ver Perfil do Profissional' },
-        { text: 'Ligar para o Profissional' },
-      ],
-     // destructiveText: 'Delete',
-      cancelText: 'Cancelar',
-      cancel: function() {
-        alert('CANCELLED');
-      },
-
-      buttonClicked: function(index) {
-        alert(index);
-        return true;
-      },
-      destructiveButtonClicked: function() {
-        alert('DESTRUCT');
-        return true;
-      }
-    });
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $scope.solicitar_orcamento = function() {
+ $scope.profissionalAbrir = function() {
       $scope.modal.show();
   };
 
+ 
 
-  $scope.abrir_orcamento = function() {
-      $scope.modal_orcamento.show();
-  };
-
-
- $ionicModal.fromTemplateUrl('templates/modals/orcamento.html', {
+ $ionicModal.fromTemplateUrl('templates/modals/profissional.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
 
 
-
- $ionicModal.fromTemplateUrl('templates/modals/orcamento_abrir.html', {
-    scope: $scope
-  }).then(function(modal_orcamento) {
-    $scope.modal_orcamento = modal_orcamento;
-  });
  
-  $scope.closeOrcamento = function() {
-    
-    $scope.modal_orcamento.hide();
+ 
+  $scope.profissionalFechar = function() {
+     
+	 $scope.modal.hide();
 
 	 
   };
@@ -644,17 +651,12 @@ $scope.cadastroSalvar = function() {
 
 
 
- $scope.registros = [
-	{ titulo: 'Pintura', data: '07/12/2014 05:30', id: 1, notificacao: 0 },
-	{ titulo: 'Serralheria', data: '08/12/2014 05:30', id: 1, notificacao: 3 },
-	{ titulo: 'Limpeza de Quintal', data: '10/12/2014 05:30', id: 1, notificacao: 5 },
-
-	  ];
 
 
 
-
-})
+	
+	
+	})
 
 
 

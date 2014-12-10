@@ -1,56 +1,16 @@
-<header class="bar bar-header bar-stable">
- <a href="#/app/home" class="button button-icon icon ion-ios7-arrow-thin-left"></a>
-   <div class="h1 title">Orçamentos</div>
+<header class="bar bar-header bar-stable"> <a href="#/app/home" class="button button-icon icon ion-ios7-arrow-thin-left"></a>
+  <div class="h1 title">Orçamentos</div>
   <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon"></button>
 </header>
 <ion-content class="has-header padding">
-
-
- 
-       
-      <p>Envie uma solicitação de orçamento para todos os profissionais próximos a você.</p>
-  
-
-<button class="button button-block button-stable" ng-click="solicitar_orcamento()">
-  Solicitar Orçamento
-</button>
-
-
-
-
-<p>Minhas solicitações</p>
-
-<ion-list>
- 
-
-
+  <p>Envie uma solicitação de orçamento para todos os profissionais próximos a você.</p>
+  <button class="button button-block button-stable" ng-click="solicitar_orcamento()"> Solicitar Orçamento </button>
+  <p>Minhas solicitações</p>
+  <ion-list>
     <ion-item class="item" ng-repeat="registro in registros" ng-click="abrir_orcamento()">
-     <span class="badge badge-positive">{{registro.notificacao}}</span>
+    <span class="badge badge-positive">{{registro.notificacao}}</span>
     <h2>{{registro.titulo}}</h2>
     <p>{{registro.data}} </p>
-
-
   </ion-list>
-
-  
-  
-    
 </ion-content>
-
- <div class="tabs tabs-icon-top">  
-       
-     
-     
-<a class="tab-item nav-clear menu-close has-badge" href="#/app/home" style="font-size:11px"> <i class="icon ion-ios7-home-outline"></i> Home </a>
-
-<a class="tab-item nav-clear menu-close has-badge"  href="#/app/proximo" style="font-size:11px"><i class="icon ion-location"></i> Próximo <span class="badge badge-assertive" style="font-size:9px">0</span> </a> 
-
-<a class="tab-item nav-clear menu-close has-badge" href="#/app/pesquisar" style="font-size:11px"> <i class="icon ion-ios7-search"></i> Pesquisar <span class="badge badge-assertive" style="font-size:9px">0</span> </a> 
-
- 
-<a class="tab-item active nav-clear menu-close has-badge" href="#/app/orcamentos" style="font-size:11px"> <i class="icon ion-ios7-copy-outline"></i> Orçamento <span class="badge badge-assertive" style="font-size:9px">3</span> </a>
-  
-  
- 
-  </div>
- 
+<div class="tabs tabs-icon-top"> <a class="tab-item active nav-clear menu-close has-badge" href="#/app/home" style="font-size:11px"> <i class="icon ion-ios7-home-outline"></i> Home </a> <a class="tab-item nav-clear menu-close has-badge" href="#/app/pesquisar" style="font-size:11px"> <i class="icon ion-search"></i> Buscar </a> <a class="tab-item nav-clear menu-close has-badge"  href="#/app/proximo" style="font-size:11px"><i class="icon ion-location"></i> Próximo </a> <a class="tab-item nav-clear menu-close has-badge" href="#/app/orcamentos" style="font-size:11px"> <i class="icon ion-clipboard"></i> Orçamento <span class="badge badge-assertive" style="font-size:9px">3</span> </a> </div>

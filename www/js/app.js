@@ -1,13 +1,8 @@
- 
-
 angular.module('selfboss', ['ionic',  'selfboss.controllers', 'selfboss.directives'])
-
- 
- 
+  
  .run(function($ionicPlatform,$rootScope, auth) {
-	  
+    
     auth.checkStatus();
- 
  	 
   $ionicPlatform.ready(function() {
     
@@ -22,6 +17,11 @@ angular.module('selfboss', ['ionic',  'selfboss.controllers', 'selfboss.directiv
   
   
   });
+  
+  
+  
+  
+   
   
   
 })
@@ -68,6 +68,7 @@ angular.module('selfboss', ['ionic',  'selfboss.controllers', 'selfboss.directiv
  
  
 .config(function($stateProvider, $urlRouterProvider) {
+	  
      $stateProvider
    
    
