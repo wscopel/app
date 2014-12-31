@@ -75,8 +75,8 @@ $scope.cadastroSalvar = function() {
  			
 	$http({
         method  : 'POST',
- 	       url     : 'http://localhost/selfboss/html/cadastro/salvar',  
-          ///url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar', 
+ 	     //  url     : 'http://localhost/selfboss/html/cadastro/salvar',  
+          url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar', 
          data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
     })
@@ -125,8 +125,8 @@ $scope.cadastroSalvar = function() {
   
  	$http({
         method  : 'POST',
-	      url     : 'http://localhost/selfboss/html/home/recupera',  
-        // url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera', 
+	        //  url     : 'http://localhost/selfboss/html/home/recupera',  
+          url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera', 
          data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
     })
@@ -209,8 +209,8 @@ $scope.cadastroSalvar = function() {
  			   
  	 $http({
         method  : 'POST',  
-         url     : 'http://localhost/selfboss/html/home/login',  
-        // url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login', 
+           //  url     : 'http://localhost/selfboss/html/home/login',  
+         url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login', 
 
         data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
