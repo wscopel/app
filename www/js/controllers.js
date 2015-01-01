@@ -37,7 +37,25 @@ angular.module('selfboss.controllers', [])
 
 
 
-.controller('homeCtrl', function($scope, $stateParams) {
+.controller('homeCtrl', function($scope, $stateParams, $ionicLoading, $timeout ) {
+	
+	
+	 $scope.show = function() {
+    $ionicLoading.show({
+      template: 'carregando...'
+    });
+  };
+  
+  
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+  
+     $scope.show();
+     $timeout(function() {
+					 $scope.hide();
+					}, 300);
 
  
 
@@ -46,9 +64,7 @@ angular.module('selfboss.controllers', [])
 
  
  .controller('LoginCtrl', function($scope, $ionicModal, $http, $timeout, $location, $state, auth, $ionicLoading) {
-	 
-	  
-   
+	
  $scope.logofechar        = true;
 
 
@@ -579,87 +595,34 @@ $scope.cadastroSalvar = function() {
 })
  
  
+ 
+
+.controller('buscarCtrl', function($scope, $stateParams, $timeout, $ionicLoading) { 
 
 
-.controller('pesquisarCtrl', function($scope, $stateParams, $timeout, $ionicModal, $ionicActionSheet) {
-	
-  $scope.registros = [
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 1 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 2 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 3 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 4 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 5 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 6 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 7 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 8 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 9 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 10 },
-	{ nome: 'Joao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 11 },
-   ];
-
-
-
-
-// infinit scroll
-//http://codepen.io/gnomeontherun/pen/HJkCj
-
-//atual
-//http://codepen.io/ionic/pen/mqolp
-
- $scope.doRefresh = function() {
-    
-    console.log('Refreshing!');
-
-    
-    $timeout( function() {
-      //simulate async response
-      $scope.registros.push( 
-      [
-	{ nome: 'aJoao Arnaldo', cidade: 'Vitoria - ES', Profissao: 'Pedreiro', foto: 'img/homem.jpg', id: 1 } 
-   ]
-	 
-    ); 
-
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.refreshComplete');
-    
-    }, 1000);
-      
+ $scope.show = function() {
+    $ionicLoading.show({
+      template: 'carregando...'
+    });
+  };
+  
+  
+  $scope.hide = function(){
+    $ionicLoading.hide();
   };
 
- 
-
- $scope.profissionalAbrir = function() {
-      $scope.modal.show();
-  };
-
- 
-
- $ionicModal.fromTemplateUrl('templates/modals/profissional.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-
+  
+     $scope.show();
+     $timeout(function() {
+					 $scope.hide();
+					}, 300);
  
  
-  $scope.profissionalFechar = function() {
-     
-	 $scope.modal.hide();
-
-	 
-  };
-
-
-
-
-
-
-
-	
-	
-	})
+  
+  
+  
+  
+})
 
 
 

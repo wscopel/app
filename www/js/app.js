@@ -104,12 +104,12 @@ angular.module('selfboss', ['ionic',  'selfboss.controllers', 'selfboss.directiv
 	
 	
   
-.state('app.pesquisar', {
-      url: "/pesquisar",
+.state('app.buscar', {
+      url: "/buscar",
       views: {
         'menuContent' :{
-          templateUrl: "templates/pesquisar.html",
-          controller: 'pesquisarCtrl'
+          templateUrl: "templates/buscar.html",
+          controller: 'buscarCtrl'
         }
       }
     })	
