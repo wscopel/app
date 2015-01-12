@@ -91,8 +91,8 @@ $scope.cadastroSalvar = function() {
  			
 	$http({
         method  : 'POST',
- 	     //  url     : 'http://localhost/selfboss/html/cadastro/salvar',  
-          url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar', 
+ 	      url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar',  
+          //url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar', 
          data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
     })
@@ -109,22 +109,31 @@ $scope.cadastroSalvar = function() {
     			    $scope.retorno_error             = data.retorno_error; 
 					 
                    
-			 } else {
-				    $scope.enviando                  = false;
+			 } else { 
+				   
+			        window.localStorage['logado']                       = true;
+ 					window.localStorage['session_cd_cliente']           = data.session_cd_cliente;
+					window.localStorage['session_nome']                 = data.session_nome;
+					window.localStorage['session_usuario']              = data.session_usuario;
+					window.localStorage['session_status']               = data.session_status;
+					window.localStorage['session_email']                = data.session_email; 
+					window.localStorage['session_emp_secreto']          = data.session_emp_secreto;
+					window.localStorage['session_plano']                = data.session_plano;
+ 					window.localStorage['session_produto_usuario']      = data.session_produto_usuario;
+					window.localStorage['session_produto_captador']     = data.session_produto_captador;
+					window.localStorage['session_produto_profissional'] = data.session_produto_profissional; 
+ 					window.localStorage['token']                        = data.session_emp_secreto;
+					
+ 					$timeout(function() {
+					  $scope.closeLogin();
+					  $state.go('app.home');
+					}, 500);
+  				 
 				 
-					$scope.errorNome                 = '';
- 					$scope.errorCelular              = '';
- 					$scope.errorEmail                = '';
-					$scope.errorEmail1               = '';
- 					$scope.errorUsuario              = '';
-					$scope.errorSenha                = '';
-					
- 					$scope.retorno          = data.retorno;
-					$scope.retorno_error    = data.retorno_error;
-					$scope.retorno_mensagem = data.retorno_mensagem;
-					
- 					 
- 				 }
+				 
+				    
+				 
+				 }
         }); 
 }	 
 	 
@@ -141,8 +150,8 @@ $scope.cadastroSalvar = function() {
   
  	$http({
         method  : 'POST',
-	        //  url     : 'http://localhost/selfboss/html/home/recupera',  
-          url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera', 
+	      url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera',  
+          //url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera', 
          data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
     })
@@ -225,8 +234,8 @@ $scope.cadastroSalvar = function() {
  			   
  	 $http({
         method  : 'POST',  
-           //  url     : 'http://localhost/selfboss/html/home/login',  
-         url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login', 
+          url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login',  
+        // url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login', 
 
         data    : dados,  
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
@@ -283,26 +292,8 @@ $scope.cadastroSalvar = function() {
   }
     
     $scope.logout = function() {
-		//alert('sair');
-		         	/*
-					
-		            window.localStorage['session_nome'];
-  		            $window.sessionStorage.logado = '';
- 					$window.sessionStorage.session_cd_cliente = '';
-					$window.sessionStorage.session_nome = '';
-					$window.sessionStorage.session_usuario = '';
-					$window.sessionStorage.session_status = '';
-					$window.sessionStorage.session_email = '';
-					$window.sessionStorage.session_emp_secreto = '';
-					$window.sessionStorage.session_plano = '';
- 					$window.sessionStorage.session_produto_usuario = '';
-					$window.sessionStorage.session_produto_captador = '';
-					$window.sessionStorage.session_produto_profissional = '';
-				    $window.sessionStorage.token = '';*/
-					
-					window.localStorage.clear();
-					
-		            $state.go('login');
+ 		window.localStorage.clear();
+ 		$state.go('login');
    };
    
    
@@ -388,7 +379,7 @@ $scope.cadastroSalvar = function() {
 
  
 
-.controller('dadosCtrl', function($scope, $stateParams,$ionicLoading,$timeout, $ionicActionSheet) {
+.controller('dadosCtrl', function($scope, $stateParams,$ionicLoading, $http, $timeout, $ionicActionSheet) {
 	
 	
 	$scope.session_cd_cliente = window.localStorage['session_cd_cliente'];
@@ -424,9 +415,9 @@ $scope.cadastroSalvar = function() {
 
  
 
- $scope.show = function() {
+ $scope.show = function(id) {
     $ionicLoading.show({
-      template: 'carregando...'
+      template: id
     });
   };
   
@@ -438,20 +429,39 @@ $scope.cadastroSalvar = function() {
       
 
  $scope.dados = function() {
-   $scope.show();	
-   $scope.perfil_dados    = true;
-   $scope.perfil_endereco = false;
-   $scope.perfil_senha    = false;
+   $scope.show('carregando...');	
    
-   $scope.isActiveD       = true;
-   $scope.isActiveE       = false;
-   $scope.isActiveS       = false;
-    
-
-
     $timeout(function() {
 					 $scope.hide();
 					}, 500);
+					 
+	$http.get("http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/dadosJson/"+$scope.session_cd_cliente).success(function(data){	
+ 		  $scope.registro  = data;
+		  
+		  
+		     if(data['sexo']==1){
+				 $scope.registros_sexo = [
+				  {nome: "Masculino", id: "1"},
+				  {nome: "Feminino", id: "2"},
+				];
+ 			 
+			}else if(data['sexo']==2){
+ 				$scope.registros_sexo = [
+				  {nome: "Feminino", id: "2"},
+				  {nome: "Masculino", id: "1"} 
+				];
+			
+ 			 }else{
+				$scope.registros_sexo = [
+					{nome: "Selecione", id: ""},
+					{nome: "Masculino", id: "1"}, 
+					{nome: "Feminino", id: "2"}
+ 				]; 
+ 			 }
+		  
+		  
+		});				
+					
 	 
   };
 
@@ -460,7 +470,7 @@ $scope.cadastroSalvar = function() {
 
 
  $scope.endereco = function() {
- 	$scope.show();	
+ 	  $scope.show('carregando...');
 	  $scope.perfil_dados    = false;
       $scope.perfil_endereco = true;
       $scope.perfil_senha    = false;
@@ -480,7 +490,7 @@ $scope.cadastroSalvar = function() {
   };
 
    $scope.senha = function() {
-   	$scope.show();	
+   	  $scope.show('carregando...');
 	  $scope.perfil_dados    = false;
       $scope.perfil_endereco = false;
       $scope.perfil_senha    = true;
@@ -500,7 +510,318 @@ $scope.cadastroSalvar = function() {
 
 
 
+
+
+	 
+$scope.dadosSalvar = function() {
+    $scope.show('Verificando dados...');
+	$scope.enviando_gerar = true;
+	
+	 
+	var dados = $.param({ 
+ 				nome:     $("input:text[name='nome']").val(),
+ 				telefone: $("input:text[name='telefone']").val(),
+				celular:  $("input:text[name='celular']").val(),
+ 				sexo:     $("#sexo option:selected").val(),
+				email:    $("input:text[name='email']").val(),
+				email1:   $("input:text[name='email1']").val() 
+ 				});	 
+ 	 
+	$http({
+        method  : 'POST',
+        url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/dadosSalvar/'+$scope.session_cd_cliente,
+        data    : dados,  
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+    })
+        .success(function(data) {
+ 
+            if (!data.sucesso) {
+				    $scope.enviando_gerar  = false;
+					  
+ 					$scope.errorNome       = data.errors.nome;
+ 					$scope.errorTelefone   = data.errors.telefone; 
+					$scope.errorCelular    = data.errors.celular;
+ 					$scope.errorSexo       = data.errors.sexo;
+					$scope.errorEmail      = data.errors.email;
+					$scope.errorEmail1     = data.errors.email1;
+   				    $scope.retorno_error    = data.retorno_error;
+				 	
+					  $timeout(function() {
+					     $scope.hide();
+					}, 500);
+					 
+					
+ 			 } else {
+				  $scope.enviando_gerar  = false;
+				  $scope.retorno         = data.retorno; 
+				   
+				  	$scope.errorNome       = false;
+ 					$scope.errorTelefone   = false;
+					$scope.errorCelular    = false;
+ 					$scope.errorSexo       = false;
+					$scope.errorEmail      = false;
+					$scope.errorEmail1     = false;
+   				    $scope.retorno_error   = false;
+				  
+				   $timeout(function() {
+					 $scope.hide();
+					}, 500);
+				  
+				  
+				 }
+        });
+}
+	 
+
+ 
+
+
+
+
+
+
+
 })
+
+
+.controller('enderecoCtrl', function($scope, $stateParams,$ionicLoading, $http, $timeout, $ionicActionSheet) {
+	 
+    $scope.data = { 'estado' : '10000000' };
+   
+    $scope.$watch('data.estado', function(newValue, oldValue) {
+          
+		 if(newValue==10000000){
+			 return;
+			 
+			 }else{
+		 
+		 $http.get("http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/enderecoCidadeJson/"+newValue).success(function(data2){
+				 $scope.registros_cidade  = data2;
+				});
+		  
+		 }
+    });
+   
+	
+	
+	$scope.session_cd_cliente = window.localStorage['session_cd_cliente'];
+    $scope.session_usuario    = window.localStorage['session_usuario'];
+    $scope.session_nome       = window.localStorage['session_nome'];
+
+ 
+ $scope.show = function(id) {
+    $ionicLoading.show({
+      template: id
+    });
+  };
+  
+  
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+  
+      
+
+ $scope.endereco = function() {
+	 
+	 
+	 
+	 
+   $scope.show('carregando...');	
+   
+    $timeout(function() {
+					 $scope.hide();
+					}, 500);
+					 
+	$http.get("http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/enderecoJson/"+$scope.session_cd_cliente).success(function(data){	
+ 		  $scope.registro  = data;  
+		   
+		   
+		   
+		    $http.get("http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/enderecoEstadoJson/").success(function(data2){
+ 			       $scope.registros_estado   = data2;
+  				  });
+				  
+				  
+		});				
+					
+	 
+  };
+
+  
+  $scope.endereco();
+  
+	 
+$scope.enderecoSalvar = function() {
+    $scope.show('Verificando dados...');
+	$scope.enviando_gerar = true;
+	 
+	var dados = $.param({ 
+				cep:         $("input:text[name='cep']").val(),
+				logradouro:  $("input:text[name='logradouro']").val(),
+				numero:      $("input:text[name='numero']").val(),
+				complemento: $("input:text[name='complemento']").val(),
+ 				bairro:      $("input:text[name='bairro']").val(),
+				estado:      $("#estado option:selected").val(),
+				cidade:      $("#cidade option:selected").val(),
+				estadomudar: $('#check').is(':checked')
+  			});	 
+ 	 
+	$http({
+        method  : 'POST',
+        url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/enderecoSalvar/'+$scope.session_cd_cliente,
+        data    : dados,  
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+    })
+        .success(function(data) {
+ 
+            if (!data.sucesso) {
+				    $scope.enviando_gerar  = false;
+					  
+ 					$scope.errorNome       = data.errors.nome;
+ 					$scope.errorTelefone   = data.errors.telefone; 
+					$scope.errorCelular    = data.errors.celular;
+ 					$scope.errorSexo       = data.errors.sexo;
+					$scope.errorEmail      = data.errors.email;
+					$scope.errorEmail1     = data.errors.email1;
+   				    $scope.retorno_error    = data.retorno_error;
+				 	
+					  $timeout(function() {
+					     $scope.hide();
+					}, 500);
+					 
+					
+ 			 } else {
+				  $scope.enviando_gerar  = false;
+				  $scope.retorno         = data.retorno; 
+				   
+				  	$scope.errorNome       = false;
+ 					$scope.errorTelefone   = false;
+					$scope.errorCelular    = false;
+ 					$scope.errorSexo       = false;
+					$scope.errorEmail      = false;
+					$scope.errorEmail1     = false;
+   				    $scope.retorno_error   = false;
+				  
+				   $timeout(function() {
+					 $scope.hide();
+					}, 500);
+					
+					
+				  $scope.endereco();
+				  
+				 }
+        });
+}
+	 
+
+ 
+
+
+
+
+
+
+
+})
+
+
+
+.controller('senhaCtrl', function($scope, $stateParams,$ionicLoading, $http, $timeout, $ionicActionSheet) {
+	 
+	$scope.session_cd_cliente = window.localStorage['session_cd_cliente'];
+    $scope.session_usuario    = window.localStorage['session_usuario'];
+    $scope.session_nome       = window.localStorage['session_nome'];
+
+ 
+ $scope.show = function(id) {
+    $ionicLoading.show({
+      template: id
+    });
+  };
+  
+  
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+   
+  
+ $scope.senha = function() {
+ $scope.show('carregando...');	
+   
+    $timeout(function() {
+					 $scope.hide();
+					}, 500);
+					 
+	   
+  };
+
+  
+  $scope.senha();
+  
+	 
+$scope.senhaSalvar = function() {
+    $scope.show('Salvando nova senha...');
+	$scope.enviando_gerar = true;
+	 
+	var dados = $.param({ 
+					back_novasenha:   $("input:password[name='back_novasenha']").val(),
+				    back_novasenha1:  $("input:password[name='back_novasenha1']").val(),
+  			});	 
+ 	 
+	$http({
+        method  : 'POST',
+        url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/perfil/senhaSalvar/'+$scope.session_cd_cliente,
+        data    : dados,  
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+    })
+        .success(function(data) {
+ 
+            if (!data.sucesso) {
+				    $scope.enviando_gerar  = false;
+  					$scope.errorSenha      = data.errors.back_novasenha;
+					   $scope.retorno        = data.retorno;
+				     $scope.retorno_error     = data.retorno_error;
+					 	   $scope.back_novasenha      = '';
+				    $scope.back_novasenha1       = '';
+					 
+					  $timeout(function() {
+					     $scope.hide();
+					}, 500);
+ 					
+ 			 } else {
+				  $scope.enviando_gerar  = false;
+				   $scope.retorno        = data.retorno;
+				  $scope.retorno_error  = false;
+				  $scope.errorSenha      = false;
+				  $scope.back_novasenha      = '';
+				    $scope.back_novasenha1       = '';
+				   
+		 
+ 			  
+				   $timeout(function() {
+					 $scope.hide();
+					}, 500);
+					 
+				  $scope.senha();
+				  
+				 }
+        });
+}
+	 
+
+ 
+
+
+
+
+
+
+
+})
+
+
+
  
 .controller('orcamentosCtrl', function($scope, $stateParams, $ionicModal, $ionicActionSheet) {
 
@@ -597,8 +918,7 @@ $scope.cadastroSalvar = function() {
  
  
 
-.controller('buscarCtrl', function($scope, $stateParams, $timeout, $ionicLoading) { 
-
+.controller('buscarCtrl', function($scope, $stateParams, $timeout, $ionicLoading, $http) { 
 
  $scope.show = function() {
     $ionicLoading.show({
@@ -616,6 +936,115 @@ $scope.cadastroSalvar = function() {
      $timeout(function() {
 					 $scope.hide();
 					}, 300);
+					
+					
+					
+					
+					
+					
+   $scope.buscarProfissionais = function() {
+		
+	$scope.enviando          = true;
+	$scope.retorno_error     = '';
+	$scope.errorCidade      = '';
+ 	
+	var dados = $.param({ 
+			codigo_cidade:  $("input:hidden[name='codigo_cidade']").val(),
+ 			termo:      $("input:text[name='termo']").val() 
+		});	 
+		
+		
+		console.log(dados);
+		
+		
+	/*$http({
+		method  : 'POST',
+		url     :'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/buscar/buscarProfissionais', 
+		data    : dados,  
+		headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+	})
+	
+	.success(function(data) {
+	 if (!data.success) {
+		 
+			  $scope.enviando          = false;
+			  $scope.errorCidade       = data.errors.cidade;
+ 			  $scope.retorno_error    = data.retorno_error; 
+ 	 } else {
+		      
+			   
+			  $scope.errorCidade       = '';
+			  $scope.retorno_error      = '';
+			  $scope.retorno            = data.retorno;
+ 			  $scope.enviando           = false;
+			 
+			  
+			  
+		 }
+	}); */
+	}	 
+	  
+				
+					
+					
+ 
+ 
+ 
+ 
+ $scope.cidade = function(index){ 
+				    
+	            $http.get("http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/buscar/cidade/"+index).success(function(data){
+ 				 
+				  $scope.completing = false;
+				  $scope.termo          =  data.nome+' - '+data.sigla;
+				  $scope.codigo_cidade  = data.cd_cidade;
+ 				  $scope.completing = false;
+				 
+				
+				}); 
+ 				
+				 }	
+ 
+ 
+ 
+ 
+ $scope.pesquisar = function(pesquisa){
+	 
+  		if (pesquisa == ""){
+  			$scope.completing = false;
+
+		} else if(pesquisa.length < 4){
+			$scope.completing = false;
+			
+	  }else{
+			
+ 			var dados = $.param({ 
+	            local:  pesquisa
+				 		 
+   			});	
+  
+   		 $http({
+           method  : 'POST',  
+           //url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/buscar/local',  
+           url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login', 
+           data    : dados,  
+           headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+         })
+           .success(function(data) {
+			   
+				$scope.completing = true;	
+ 		    	$scope.registros      = data;    
+				 
+	        }) 
+			
+			.error(function(data) {  
+				console.log("Ocorreu um erro no banco de dados");
+	        });		
+		}
+	 };
+ 
+ 
+ 
  
  
   
@@ -626,9 +1055,7 @@ $scope.cadastroSalvar = function() {
 
 
 
- 
-
-
+  
 .controller('MapCtrl', function($scope, $ionicLoading) {
  $scope.show = function() {
     $ionicLoading.show({
@@ -702,27 +1129,9 @@ $scope.cadastroSalvar = function() {
        alert('Nao foi possível encontrar localizacao: ' + error.message);
     });
 	  
-	  
-	  /*
-     
+	 };
+  
  
+})  
 
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      console.log('Got pos', pos);
-      $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      $scope.loading.hide();
-    }, function (error) {
-       alert('Nao foi possível encontrar localizacao: ' + error.message);
-    });
-  */};
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-});

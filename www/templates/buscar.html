@@ -33,9 +33,13 @@
   <div class="h1 title"></div>
   <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon-round" style="color:#ccc; "></button>
 </header>
-<div class="geral" style="background:#d9edee;">
+
+<ion-content class="has-header" style="background:#d9edee;">
+
+
+<div class="geral">
   <div class="conteudo">
-     <div style="font-family:'Hero'; margin-top:70px; margin-left:80px;  font-size:20px; color:#235559;">Buscar Profissionais
+     <div style="font-family:'Hero'; margin-top:30px; margin-left:80px;  font-size:20px; color:#235559;">Buscar Profissionais
      </div>
      
       <div style="text-align:center; margin-top:10px; margin-bottom:5px;"><img src="img/nuvens.png" width="254" height="71" /></div>
@@ -45,21 +49,54 @@
       
       <div style=" text-align:center; width:95%; margin:0 auto;  margin-top:30px; ">
    
-   
+   <form ng-submit="buscarProfissionais()" >
    
       <div class="list list-inset" style="margin:0; padding:0px;">
         <label class="item item-input"> <i class="icon ion-search placeholder-icon"></i>
-          <input type="text" placeholder="Profissional, Profissão ou serviço">
+          <input type="text" name="termo" ng-model="termo" placeholder="Profissional, Profissão ou Serviço">
         </label>
       </div>
       <div class="list list-inset" style="margin:0; padding:0px; margin-top:5px; color:#333">
         <label class="item item-input"> <i class="icon ion-search placeholder-icon"></i>
-          <input type="text" placeholder="Qual o local para atendimento?" >
+          <input type="text" ng-keyup="pesquisar(pesquisa)" ng-model="pesquisa"   placeholder="Qual a cidade para atendimento?" >
         </label>
+           <input type="hidden" ng-model="codigo_cidade" name="codigo_cidade" value="">
+        
+         
+        
+        
+        
+        
+        
+        
+        
+         
+  <div class="autocomplete list" ng-show="completing" style="text-align:left">
+      
+   
+      <a href="#/app/buscar" ng-repeat="registro in registros" class="item" ng-click="cidade({{registro.cd_cidade}})">
+        {{registro.nome}}
+      </a>
+ 
+      
+      
+      
+      
+  </div>
+        
+        
+        
+        
+        
+        
+        
+        
       </div>
       <div style="margin:0; padding:0px; margin-top:5px;">
         <button class="button button-block button-positive"> <i class="icon ion-search placeholder-icon" style="color:#FFF"></i> Buscar Profissional </button>
       </div>
+      
+      </form>
   </div>
       
       
@@ -72,3 +109,5 @@
   
    
 </div>
+
+</ion-content>

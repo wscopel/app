@@ -1,4 +1,4 @@
-﻿<div class="modal" style="z-index:999; position: absolute; margin-left:5px; margin-top:5px;">
+﻿<div class="modal">
   <ion-header-bar>
     <h1 class="title">{{form_nome}}</h1>
     <div class="buttons">
@@ -8,16 +8,16 @@
   <ion-content>
     <div ng-show="form_login">
       <form ng-submit="doLogin()"  >
-        <div class="list">
-          <p ng-bind-html="retorno_error_login" style="margin-left:20px"></p>
+        <div class="list list-inset">
+          <p ng-bind-html="retorno_error_login" style="margin-left:20px;  color:#FF070B"></p>
           <label class="item item-input"> <span class="input-label">Usuário</span>
             <input type="text" id="usuario" name="usuario">
           </label>
-          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+          <p ng-bind-html="errorUsuario" style="margin-left:20px;  color:#FF070B;  color:#FF070B"></p>
           <label class="item item-input"> <span class="input-label">Senha</span>
             <input type="password" id="senha" name="senha">
           </label>
-          <p ng-bind-html="errorSenha" style="margin-left:20px"></p>
+          <p ng-bind-html="errorSenha" style="margin-left:20px;  color:#FF070B"></p>
           <div class="padding" ng-hide="enviando_login">
             <button type="submit" class="button button-block button-positive">Entrar</button>
           </div>
@@ -32,9 +32,9 @@
     </div>
     <div ng-show="form_esqueci">
       <form ng-submit="esqueci_senha()" id="form1">
-        <div class="list">
-                  <p ng-bind-html="retorno_esqueci_senha_error" style="margin-left:20px"></p>
-                   <p ng-bind-html="retorno_esqueci_senha" style="margin-left:20px"></p>
+        <div class="list list-inset">
+                  <p ng-bind-html="retorno_esqueci_senha_error" style="margin-left:20px;  color:#FF070B"></p>
+                   <p ng-bind-html="retorno_esqueci_senha" style="margin-left:20px;  color:#FF070B"></p>
   
  
 
@@ -42,7 +42,7 @@
             <input type="text" id="usuario_recupera_senha" name="usuario_recupera_senha">
             
           </label>
-          <p ng-bind-html="errorUsuario2" style="margin-left:20px"></p>
+          <p ng-bind-html="errorUsuario2" style="margin-left:20px;  color:#FF070B"></p>
           <div class="padding" ng-hide="enviando_gerar">
             <button class="button button-block button-positive"  type="submit" >Gerar Nova Senha</button>
           </div>
@@ -51,22 +51,22 @@
       </form>
        
     </div>
-    <div ng-show="form_cadastro">
+    <div ng-show="form_cadastro">  
       <form ng-submit="cadastroSalvar()" id="formcadastro">
-        <div class="list">
+        <div class="list list-inset">
          <label class="item item-input"> <span class="input-label">Nome</span>
             <input type="text" id="nome" name="nome">
             
           </label>
-          <p ng-bind-html="errorNome" style="margin-left:20px"></p>
+          <p ng-bind-html="errorNome" style="margin-left:20px;  color:#FF070B"></p>
           
           
           
          <label class="item item-input"> <span class="input-label">celular</span>
-            <input type="text" id="celular" name="celular">
+            <input type="text" id="celular" name="celular"  ui-mask="(99) 99999999?9" >
             
           </label>
-          <p ng-bind-html="errorCelular" style="margin-left:20px"></p>
+          <p ng-bind-html="errorCelular" style="margin-left:20px;  color:#FF070B"></p>
           
           
           
@@ -74,31 +74,32 @@
            <label class="item item-input"> <span class="input-label">E-mail</span>
             <input type="text" id="email" name="email">
            </label>
-          <p ng-bind-html="errorEmail" style="margin-left:20px"></p>
+          <p ng-bind-html="errorEmail" style="margin-left:20px;  color:#FF070B"></p>
           
           
           
           
           
          <label class="item item-input"> <span class="input-label">Usuário</span>
-            <input type="text" id="usuario" name="usuario">
+            <input type="text" id="usuario" name="usuario" class="sample1">
             
           </label>
-          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+       
+          <p ng-bind-html="errorUsuario" style="margin-left:20px;  color:#FF070B"></p>
           
           
           
           
            <label class="item item-input"> <span class="input-label">Senha</span>
-            <input type="text" id="usuario" name="usuario">
+            <input type="password" id="senha" name="senha">
             
           </label>
-          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+          <p ng-bind-html="errorSenha" style="margin-left:20px;  color:#FF070B; color:#FF070B"></p>
           
           
           
            <label class="item item-input"> <span class="input-label">Confirmar Senha</span>
-            <input type="text" id="senha1" name="senha1">
+            <input type="password" id="senha1" name="senha1">
             
           </label>
             

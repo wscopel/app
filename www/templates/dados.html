@@ -1,97 +1,90 @@
-<header class="bar bar-header bar-stable"> <a href="#/app/home" class="button button-icon icon ion-ios7-arrow-thin-left"></a>
-  <div class="h1 title">Perfil</div>
-  <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon"></button>
-</header>
-<ion-view style=" background-color:#ccc;" title="Perfil">
-<ion-content padding="true">
-  <div class="list"> <a class="item item-avatar nav-clear menu-close" ng-click="showActionsheet()"  style="border:0px;"> <img src="img/homem.jpg" width="100">
-    <h2>{{session_nome}}</h2>
-    <p>{{session_usuario}}</p>
-    </a>
-    <div style="" class="button-bar">
-      <button class="button button-small   button-block  icon ion-compose"  ng-class="{true: 'button-positive', false: 'button-stable'}[isActiveD]" ng-click="dados()"></button>
-      <button
-ng-class="{true: 'button-positive', false: 'button-stable'}[isActiveE]"
-             style="" class="button button-small button-stable button-block icon ion-location" ng-click="endereco()"></button>
-      <button 
-ng-class="{true: 'button-positive', false: 'button-stable'}[isActiveS]"
+<style type="text/css">
+.profile-pic {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	background-color: #FFF;
+	padding-top: 6px;
+	border: 3px solid #ccc;
+}
+.button-icon .icon:before, .button-icon.icon:before {
+	font-size: 22px;
+	padding: 0px;
+	margin: 0px;
+}
+.col {
+	padding: 0px;
+	margin: 0px;
+	margin-top: 8px;
+	text-align: center;
+}
+</style>
 
-            style="" class="button button-small button-stable button-block icon ion-key" ng-click="senha()"></button>
-    </div>
-    <div ng-show="perfil_dados">
-      <form>
-        <div class="item item-divider">Dados Pessoais</div>
-        <label class="item item-input"> <span class="input-label">Nome</span>
-          <input type="text" name="nome" value="Wanderson Scopel">
-        </label>
-        <label class="item item-input has-error"> <span class="input-label">Usuário</span>
-          <input type="text" name="usuario">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <label class="item item-input has-error"> <span class="input-label">Telefone</span>
-          <input type="text" name="telefone">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <label class="item item-input has-error"> <span class="input-label">Celular</span>
-          <input type="text" name="celular">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <label class="item item-input has-error"> <span class="input-label">Data Nascimento</span>
-          <input type="text" name="data nascimento">
-          <i class="icon ion-alert-circled icon_error" style="right:5px;"></i> </label>
-        <label class="item item-input item-select has-error">
-        <div class="input-label"> Sexo </div>
-        <select>
-          <option selected>Masculino</option>
-          <option>Feminino</option>
-        </select>
-        </label>
-        <button type="submit" class="button button-stable button-block"> Salvar </button>
-      </form>
-    </div>
-    <div ng-show="perfil_endereco">
-      <form>
-        <div class="item item-divider">Endereço</div>
-        <label class="item item-input"> <span class="input-label">CEP</span>
-          <input type="text" name="cep" value="29153-350">
-        </label>
-        <label class="item item-input has-error"> <span class="input-label">Logradouro</span>
-          <input type="text" name="logradouro">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <label class="item item-input has-error"> <span class="input-label">Número</span>
-          <input type="text" name="numero">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <label class="item item-input has-error"> <span class="input-label">Complemento</span>
-          <input type="text" name="complemento">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <label class="item item-input has-error"> <span class="input-label">Bairro</span>
-          <input type="text" name="bairro">
-          <i class="icon ion-alert-circled icon_error" style="right:5px;"></i> </label>
-        <label class="item item-input item-select has-error">
-        <div class="input-label"> Cidade </div>
-        <select>
-          <option selected>Cariacica</option>
-          <option>Vitoria</option>
-        </select>
-        </label>
-        <label class="item item-input item-select has-error">
-        <div class="input-label"> Estado </div>
-        <select>
-          <option selected>ES</option>
-          <option>RJ</option>
-        </select>
-        </label>
-        <button type="submit" class="button button-stable button-block"> Salvar </button>
-      </form>
-    </div>
-    <div ng-show="perfil_senha">
-      <form>
-        <div class="item item-divider">Senha</div>
-        <label class="item item-input"> <span class="input-label">Senha</span>
-          <input type="password" name="senha" value="29153-350">
-        </label>
-        <label class="item item-input has-error"> <span class="input-label">Confirmar Senha</span>
-          <input type="password" name="confsenha" value="29153-350">
-          <i class="icon ion-alert-circled icon_error"></i> </label>
-        <button type="submit" class="button button-stable button-block"> Salvar </button>
-      </form>
+<div style="z-index:99; position: absolute; margin-left:5px; margin-top:5px;"> <a href="#/app/home" > <img src="img/logo.png" width="65" height="99" /> </a></div>
+<header class="bar bar-header bar-stable" style="background-color:#FFF">
+  <div class="h1 title"></div>
+  <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon-round" style="color:#ccc; "></button>
+</header>
+<ion-content class="has-header" style="background:#d9edee;">
+  <div class="geral">
+    <div class="conteudo">
+      <div style="font-family:'Hero'; margin-top:30px; margin-left:80px;  font-size:20px; color:#235559;">Dados Pessoais </div>
+      <div style=" text-align:center; width:95%; margin:0 auto;  margin-top:30px; ">
+        <form ng-submit="dadosSalvar()" >
+          <div class="list">
+            <div ng-show="retorno" style="color:#000; text-align:left">{{ retorno }}. </div>
+            <div ng-show="retorno_error"  style="color:#FF070B; text-align:left">{{ retorno_error }}. </div>
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">Nome</span>
+            <input name="nome" type="text" ng-model="registro.nome"/>
+            
+            </label>
+             <p style="color:#FF070B; text-align:left" ng-bind-html="errorNome"></p>
+             
+             
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">Telefone</span>
+            <input name="telefone" type="text" ng-model="registro.telefone"/>
+            
+            </label>
+             <p style="color:#FF070B; text-align:left" ng-show="errorTelefone" ng-bind-html="errorTelefone"></p>
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">Celular</span>
+            <input name="celular" type="text" ng-model="registro.celular"/>
+            
+            </label>
+             <p style="color:#FF070B; text-align:left" ng-show="errorCelular" ng-bind-html="errorCelular"></p>
+            
+            <label class="item item-input item-select">
+            <span class="input-label" style="text-align:left">Sexo</span>
+            <select name="sexo" id="sexo" class="form-control" >
+              <option ng-repeat="registro_sexo in registros_sexo" value="{{registro_sexo.id}}">{{registro_sexo.nome}}</option>
+            </select>
+            
+            </label>
+             <p class="text-danger" ng-show="errorSexo" ng-bind-html="errorSexo"></p>
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">E-mail</span>
+            <input type="text"  ng-model="registro.email" name="email">
+            
+            </label>
+             <p  style="color:#FF070B; text-align:left" ng-show="errorEmail" ng-bind-html="errorEmail"></p>
+           
+           
+           
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">Confirme E-mail</span>
+            <input type="text"  ng-model="registro.email1" name="email1">
+             
+            </label>
+            <p  style="color:#FF070B; text-align:left" ng-show="errorEmail1" ng-bind-html="errorEmail1"></p>
+          </div>
+          <div style="margin:0; padding:0px; margin-top:5px;" ng-hide="enviando_gerar">
+            <button class="button button-block button-positive"> <i class="icon ion-checkmark placeholder-icon" style="color:#FFF"></i> Salvar</button>
+          </div>
+          <div style="margin:0; padding:0px; margin-top:5px;" ng-show="enviando_gerar"> <img src="img/loading.gif"> aguarde, estamos verificando seus dados... </div>
+        </form>
+      </div>
     </div>
   </div>
 </ion-content>

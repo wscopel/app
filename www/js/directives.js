@@ -12,14 +12,14 @@ angular.module('selfboss.directives', [])
     link: function ($scope, $element, $attr) {
       
 	  
-	    
+	   // pos.coords.latitude, pos.coords.longitude
 	  
 	    
 	  function initialize() {
 		  
      var options = {  
       zoom: 14,  
-      center: new google.maps.LatLng(-20.4646048, -54.6194344),  
+      center: new google.maps.LatLng(-20.321008, -40.337257),  
       mapTypeId: google.maps.MapTypeId.ROADMAP  
     };
       
@@ -89,7 +89,7 @@ angular.module('selfboss.directives', [])
     }
     
     // Adjusting the map to new bounding box
-    map.fitBounds(bounds)
+    //map.fitBounds(bounds)
     $scope.onCreate({map: map});
 
         

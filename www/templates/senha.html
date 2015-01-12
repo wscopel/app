@@ -1,0 +1,67 @@
+<style type="text/css">
+.profile-pic {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	background-color: #FFF;
+	padding-top: 6px;
+	border: 3px solid #ccc;
+}
+.button-icon .icon:before, .button-icon.icon:before {
+	font-size: 22px;
+	padding: 0px;
+	margin: 0px;
+}
+.col {
+	padding: 0px;
+	margin: 0px;
+	margin-top: 8px;
+	text-align: center;
+}
+</style>
+
+<div style="z-index:99; position: absolute; margin-left:5px; margin-top:5px;"> <a href="#/app/home" > <img src="img/logo.png" width="65" height="99" /> </a></div>
+<header class="bar bar-header bar-stable" style="background-color:#FFF">
+  <div class="h1 title"></div>
+  <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon-round" style="color:#ccc; "></button>
+</header>
+<ion-content class="has-header" style="background:#d9edee;">
+  <div class="geral">
+    <div class="conteudo">
+      <div style="font-family:'Hero'; margin-top:30px; margin-left:80px;  font-size:20px; color:#235559;">Senha </div>
+      <div style=" text-align:center; width:95%; margin:0 auto;  margin-top:30px; ">
+        <form ng-submit="senhaSalvar()" >
+          <div class="list">
+            <div ng-show="retorno" style="color:#000; text-align:left">{{ retorno }}. </div>
+            <div ng-show="retorno_error"  style="color:#FF070B; text-align:left">{{ retorno_error }}. </div>
+           
+            
+             
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">Senha</span>
+                  <input name="back_novasenha" type="password" ng-model="registro.back_novasenha" />
+             </label>
+                 <p  style="color:#FF070B; text-align:left" ng-show="errorSenha" ng-bind-html="errorSenha"></p>
+           
+             
+        
+              
+                 <label class="item item-input">
+            <span class="input-label" style="text-align:left">Confirmar Senha</span>
+                  <input name="back_novasenha1" type="password" ng-model="registro.back_novasenha1" />
+             </label>
+                
+               
+            
+          
+            </div>
+          
+          <div style="margin:0; padding:0px; margin-top:5px;" ng-hide="enviando_gerar">
+            <button class="button button-block button-positive"> <i class="icon ion-checkmark placeholder-icon" style="color:#FFF"></i> Salvar</button>
+          </div>
+          <div style="margin:0; padding:0px; margin-top:5px;" ng-show="enviando_gerar"> <img src="img/loading.gif"> aguarde, estamos verificando seus dados... </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,179 @@
+<style type="text/css">
+.profile-pic {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	background-color: #FFF;
+	padding-top: 6px;
+	border: 3px solid #ccc;
+}
+.button-icon .icon:before, .button-icon.icon:before {
+	font-size: 22px;
+	padding: 0px;
+	margin: 0px;
+}
+.col {
+	padding: 0px;
+	margin: 0px;
+	margin-top: 8px;
+	text-align: center;
+}
+</style>
+
+<div style="z-index:99; position: absolute; margin-left:5px; margin-top:5px;"> <a href="#/app/home" > <img src="img/logo.png" width="65" height="99" /> </a></div>
+<header class="bar bar-header bar-stable" style="background-color:#FFF">
+  <div class="h1 title"></div>
+  <button side="right" menu-toggle="right" class="button button-icon icon ion-navicon-round" style="color:#ccc; "></button>
+</header>
+<ion-content class="has-header" style="background:#d9edee;">
+  <div class="geral">
+    <div class="conteudo">
+      <div style="font-family:'Hero'; margin-top:30px; margin-left:80px;  font-size:20px; color:#235559;">Endereço </div>
+      <div style=" text-align:center; width:95%; margin:0 auto;  margin-top:30px; ">
+        <form ng-submit="enderecoSalvar()" >
+          <div class="list">
+            <div ng-show="retorno" style="color:#000; text-align:left">{{ retorno }}. </div>
+            <div ng-show="retorno_error"  style="color:#FF070B; text-align:left">{{ retorno_error }}. </div>
+           
+           
+          
+           
+           
+           
+             
+             
+            <label class="item item-input">
+            <span class="input-label" style="text-align:left">Cep</span>
+                  <input name="cep" type="text" ng-model="registro.cep" />
+             </label>
+                  <p class="text-danger" ng-show="errorCep" ng-bind-html="errorCep"></p>
+             
+        
+              
+              
+              
+              
+         
+         <label class="item item-input">
+            <span class="input-label" style="text-align:left">Logradouros</span>
+         
+         
+                  <input type="text" class="form-control" ng-model="registro.logradouro" name="logradouro" required>
+                   </label>
+                  <p class="text-danger" ng-show="errorLogradouro" ng-bind-html="errorLogradouro"></p>
+               
+               
+               
+                 <label class="item item-input">
+            <span class="input-label" style="text-align:left">Número</span>
+                  <input type="text" class="form-control" ng-model="registro.numero" name="numero" required>
+                    </label>
+                   <p class="text-danger" ng-show="errorNumero" ng-bind-html="errorNumero"></p>
+                
+              
+              
+              
+              
+              
+                <label class="item item-input">
+            <span class="input-label" style="text-align:left">Complemento</span>
+             
+                  <input type="text" class="form-control" ng-model="registro.complemento" name="complemento">
+                          </label>
+                  
+                  
+            
+                <label class="item item-input">
+            <span class="input-label" style="text-align:left">Bairro</span>
+                
+                  <input type="text" class="form-control" ng-model="registro.bairro" name="bairro">
+                  
+               </label>
+              
+              
+              
+           <label class="item item-input">
+            <span class="input-label" style="text-align:left">Cidade</span>
+              
+                  {{registro.nome_cidade}} 
+                 </label>
+                 
+                 
+                 <label class="item item-input">
+            <span class="input-label" style="text-align:left">Estado</span>
+                 
+                  {{registro.nome_estado}}  
+                    </label>
+                    
+                    
+                    
+       <ul class="list">
+
+  <li class="item item-toggle" style="text-align:left">
+     Deseja atualizar cidade e estado?
+     <label class="toggle toggle-assertive">
+       <input type="checkbox" id="check"  ng-model="mostrar_estado" value="1">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+  
+  </ul>
+                    
+                  
+                
+              
+              
+              
+              
+              <div  ng-show="mostrar_estado">
+             <label class="item item-input item-select">
+            <span class="input-label" style="text-align:left">Estado</span>
+                  <select name="estado" id="estado" ng-model="data.estado" class="form-control" >
+                    <option ng-repeat="registro_estado in registros_estado" value="{{registro_estado.cd_estado}}">{{registro_estado.nome}}</option>
+                  </select>
+                   </label>
+                   
+                   
+                   
+                   
+       
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                    <p class="text-danger" ng-show="errorEstado" ng-bind-html="errorEstado"></p>
+                
+                
+                
+                
+                
+                   <label class="item item-input item-select">
+            <span class="input-label" style="text-align:left">Cidade</span>
+                
+                  <select name="cidade" id="cidade" class="form-control">
+                    <option ng-repeat="registro_cidade in registros_cidade" value="{{registro_cidade.cd_cidade}}">{{registro_cidade.nome}}</option>
+                  </select>
+                        </label>
+                  <p class="text-danger" ng-show="errorCidade" ng-bind-html="errorCidade"></p>
+             
+                 
+          </div>  
+          
+            
+          
+            </div>
+          
+          <div style="margin:0; padding:0px; margin-top:5px;" ng-hide="enviando_gerar">
+            <button class="button button-block button-positive"> <i class="icon ion-checkmark placeholder-icon" style="color:#FFF"></i> Salvar</button>
+          </div>
+          <div style="margin:0; padding:0px; margin-top:5px;" ng-show="enviando_gerar"> <img src="img/loading.gif"> aguarde, estamos verificando seus dados... </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

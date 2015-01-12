@@ -1,4 +1,4 @@
-angular.module('selfboss', ['ionic',  'selfboss.controllers', 'selfboss.directives'])
+angular.module('selfboss', ['ionic', 'selfboss.controllers', 'selfboss.directives'])
   
  .run(function($ionicPlatform,$rootScope, auth) {
     
@@ -103,6 +103,26 @@ angular.module('selfboss', ['ionic',  'selfboss.controllers', 'selfboss.directiv
     })
 	
 	
+ .state('app.endereco', {
+      url: "/endereco",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/endereco.html",
+          controller: 'enderecoCtrl'
+        }
+      }
+    })	
+	
+	
+ .state('app.senha', {
+      url: "/senha",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/senha.html",
+          controller: 'senhaCtrl'
+        }
+      }
+    })
   
 .state('app.buscar', {
       url: "/buscar",
