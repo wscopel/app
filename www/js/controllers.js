@@ -896,8 +896,7 @@ $scope.senhaSalvar = function() {
     
     $scope.modal_orcamento.hide();
 	 $scope.modal.hide();
-
-	 
+ 
   };
 
 
@@ -918,8 +917,9 @@ $scope.senhaSalvar = function() {
  
  
 
-.controller('buscarCtrl', function($scope, $stateParams, $timeout, $ionicLoading, $http) { 
-
+.controller('buscarCtrl', function($scope, $stateParams, $timeout, $ionicLoading, $http, $ionicModal) { 
+ $scope.codigo_cidade = 0;
+ 
  $scope.show = function() {
     $ionicLoading.show({
       template: 'carregando...'
@@ -948,13 +948,12 @@ $scope.senhaSalvar = function() {
 	$scope.retorno_error     = '';
 	$scope.errorCidade      = '';
  	
-	var dados = $.param({ 
-			codigo_cidade:  $("input:hidden[name='codigo_cidade']").val(),
- 			termo:      $("input:text[name='termo']").val() 
-		});	 
+	var dados = $('#formbuscarProfissionais').serialize(); 
 		
 		
 		console.log(dados);
+		
+		
 		
 		
 	/*$http({
@@ -994,14 +993,11 @@ $scope.senhaSalvar = function() {
  $scope.cidade = function(index){ 
 				    
 	            $http.get("http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/buscar/cidade/"+index).success(function(data){
- 				 
-				  $scope.completing = false;
-				  $scope.termo          =  data.nome+' - '+data.sigla;
-				  $scope.codigo_cidade  = data.cd_cidade;
- 				  $scope.completing = false;
-				 
-				
-				}); 
+ 				  
+				  $scope.termo_cidade   =  data.nome+' - '+data.sigla;
+				  $scope.codigo_cidade  =  data.cd_cidade;
+ 				  $scope.modal.hide();
+ 				}); 
  				
 				 }	
  
@@ -1025,9 +1021,8 @@ $scope.senhaSalvar = function() {
   
    		 $http({
            method  : 'POST',  
-           //url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/buscar/local',  
-           url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login', 
-           data    : dados,  
+           url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/buscar/local',  
+            data    : dados,  
            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
          })
            .success(function(data) {
@@ -1047,6 +1042,22 @@ $scope.senhaSalvar = function() {
  
  
  
+  
+  
+  
+  
+ $scope.solicitar_orcamento = function() {
+      $scope.modal.show();
+  };
+ 
+
+ $ionicModal.fromTemplateUrl('templates/modals/buscar.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+   
   
   
   

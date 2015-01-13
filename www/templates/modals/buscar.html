@@ -1,0 +1,25 @@
+﻿ <ion-modal-view>
+      <ion-header-bar class="item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios7-search placeholder-icon"></i>
+          <input type="search" ng-keyup="pesquisar(pesquisa)" ng-model="pesquisa"   placeholder="Qual a cidade para atendimento?" >
+        </label>
+         
+        
+      </ion-header-bar>
+      <ion-content>
+         <div class="autocomplete list" ng-show="completing" style="text-align:left">
+      
+   
+      <a href="#/app/buscar" ng-repeat="registro in registros" class="item" ng-click="cidade({{registro.cd_cidade}})">
+        {{registro.nome}}
+      </a>
+ 
+      
+      
+      
+      
+  </div>
+     
+      </ion-content>
+    </ion-modal-view>

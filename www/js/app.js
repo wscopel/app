@@ -70,8 +70,7 @@ angular.module('selfboss', ['ionic', 'selfboss.controllers', 'selfboss.directive
 .config(function($stateProvider, $urlRouterProvider) {
 	  
      $stateProvider
-   
-   
+    
     .state('app', {
       url: "/app",
       abstract: true,
