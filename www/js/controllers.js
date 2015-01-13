@@ -1067,7 +1067,19 @@ $scope.senhaSalvar = function() {
 
 
   
-.controller('MapCtrl', function($scope, $ionicLoading) {
+.controller('MapCtrl', function($scope, $ionicLoading) {  
+
+
+ navigator.geolocation.getCurrentPosition(function (pos) {
+      console.log('Got pos', pos);
+	  
+	   $scope.myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+ 		alert(pos.coords.latitude);   
+	  
+	   }, function (error) {
+       alert('Nao foi possível encontrar localizacao: ' + error.message);
+    });
+	
  $scope.show = function() {
     $ionicLoading.show({
       template: 'carregando...'
