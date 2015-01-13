@@ -1067,14 +1067,46 @@ $scope.senhaSalvar = function() {
 
 
   
-.controller('MapCtrl', function($scope, $ionicLoading) {  
+.controller('MapCtrl', function($scope, $ionicLoading) {
+	
+	
+        var watchID;
+
+        //function iniciarCaptura(){
+            watchID = navigator.geolocation.watchPosition(mostrarTela, fail, { timeout: 30000 });
+        //}
+
+        function mostrarTela(position){
+            var html ='Latitude: ' + position.coords.latitude         + '<br />' +
+                      'Longitude: '         + position.coords.longitude         + '<br />' +
+                      'Altitude: '          + position.coords.altitude          + '<br />' +
+                      'Precisão: '          + position.coords.accuracy          + '<br />' +
+                      'Precisão de altitude: ' + position.coords.altitudeAccuracy  + '<br />' +
+                      'Direção: '           + position.coords.heading           + '<br />' +
+                      'Velocidade: '        + position.coords.speed             + '<br />' +
+                      'Timestamp: '         + new Date(position.timestamp)      + '<br />';
+
+
+            var result = document.getElementById("result");
+             $scope.local = html;
+            ///result.innerHTML = html;
+        }
+
+        function fail(error){
+            alert('Error: ' + error.code);
+            alert('Error: ' + error.message);
+        }
+	
+	
+	
+	/*  
 
 
  navigator.geolocation.getCurrentPosition(function (pos) {
-      console.log('Got pos', pos);
+     // console.log('Got pos', pos);
 	  
-	   $scope.myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
- 		alert(pos.coords.latitude);   
+	  // $scope.myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+ 		$scope.local = pos.coords.latitude;   
 	  
 	   }, function (error) {
        alert('Nao foi possível encontrar localizacao: ' + error.message);
@@ -1155,6 +1187,6 @@ $scope.senhaSalvar = function() {
 	 };
   
  
-})  
+*/})  
 
   
